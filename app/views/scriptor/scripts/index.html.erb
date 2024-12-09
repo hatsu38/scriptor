@@ -1,0 +1,20 @@
+<div class="min-h-screen bg-gray-900 text-gray-200 py-8">
+  <div class="max-w-4xl mx-auto px-4">
+    <!-- Header -->
+    <h1 class="text-4xl font-bold text-blue-400 mb-8 border-b border-gray-700 pb-2">
+      📜 Scripts Explorer
+    </h1>
+
+    <!-- Scripts List -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <% @scripts.each_with_index do |script, index| %>
+        <div class="bg-gray-800 hover:bg-gray-700 p-4 rounded-lg shadow-lg transition duration-200 group">
+          <h2 class="text-xl font-semibold mb-2 text-gray-300 group-hover:text-blue-300">
+            <%= index + 1 %>. <%= link_to script, script_path(script), class: "hover:underline" %>
+          </h2>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>
