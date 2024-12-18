@@ -1,28 +1,22 @@
 # Scriptor
-Short description and motivation.
 
-## Usage
-How to use my plugin.
+Scriptorはscriptフォルダにあるrubyファイルを、ブラウザから実行できるようにしたRails Engineです。
+`Rails 8.0.0 >= 0` の場合 `bin/rails generate scriot my_script` を実行すると `script/myscript.rb` が作成されます。
+(Rails 8.0.0 以上でなくても、scriptフォルダにファイルを置いておけば利用可能です。)
 
-## Installation
-Add this line to your application's Gemfile:
+このscriptをブラウザから一覧で見たり、詳細ページではコードを閲覧したり、実行できます。
 
-```ruby
-gem "scriptor"
-```
+## 使い方
 
-And then execute:
-```bash
-$ bundle
-```
+1. `bundle add scriptor`
+2. config/routes.rb に `mount Scriptor::Engine => "/scriptor"` を記載
+3. scriptフォルダにスクリプトを作る
 
-Or install it yourself as:
-```bash
-$ gem install scriptor
-```
+で完成です。
+
 
 ## Contributing
-Contribution directions go here.
+- 色々足りていません。大歓迎です。
 
 ## License
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).

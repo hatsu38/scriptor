@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    scriptor (0.1.0)
-      rails (>= 8.0.0)
+    scriptor (0.0.1)
+      rails
 
 GEM
   remote: https://rubygems.org/
