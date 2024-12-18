@@ -10,7 +10,7 @@
       <% @scripts.each_with_index do |script, index| %>
         <div class="bg-gray-800 hover:bg-gray-700 p-4 rounded-lg shadow-lg transition duration-200 group">
           <h2 class="text-xl font-semibold mb-2 text-gray-300 group-hover:text-blue-300">
-            <%= index + 1 %>. <%= link_to script, script_path(script), class: "hover:underline" %>
+            <%= index + 1 %>. <%= link_to script.filename, script_path(script.filename), class: "hover:underline" %>
           </h2>
         </div>
       <% end %>

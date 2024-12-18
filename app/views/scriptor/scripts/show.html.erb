@@ -8,22 +8,22 @@
     <!-- Script File Details -->
     <div class="bg-gray-800 shadow-lg rounded-lg p-6 mb-6">
       <h2 class="text-2xl font-semibold text-blue-300 mb-4">
-        <%= @filename %>
+        <%= @script.filename %>
       </h2>
       <div class="bg-gray-900 text-white p-4 rounded-md overflow-auto">
         <pre>
           <code id="code-block" class="language-ruby">
-            <%= @script %>
+            <%= @script.content %>
           </code>
         </pre>
       </div>
-      <div id="hidden-code" class="hidden"><%= @script %></div>
+      <div id="hidden-code" class="hidden"><%= @script.content %></div>
     </div>
 
     <!-- Run Script Form -->
     <div class="bg-gray-800 shadow-lg rounded-lg p-6 mb-6">
       <h3 class="text-xl font-semibold text-blue-300 mb-4">Run Script</h3>
-      <%= form_with url: run_script_path(@filename.sub(".rb", "")), method: :post, local: true, id: "script-form" do %>
+      <%= form_with url: run_script_path(@script.filename), method: :post, local: true, id: "script-form" do %>
         <div class="mb-4">
           <label for="args" class="block text-sm font-medium text-gray-300 mb-1">
             Arguments (space-separated)
@@ -35,7 +35,7 @@
         <div class="mt-6">
           <h4 class="text-lg font-semibold text-gray-300 mb-2">Command Preview:</h4>
           <div class="bg-gray-900 text-green-400 p-4 rounded-md font-mono shadow-inner">
-            ruby <%= @filename %> <span id="command-preview-args"></span>
+            ruby <%= @script.filename %> <span id="command-preview-args"></span>
           </div>
         </div>
 

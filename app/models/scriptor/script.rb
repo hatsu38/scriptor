@@ -25,8 +25,16 @@ module Scriptor
     end
 
     # スクリプトの実行メソッド
-    def run
-      instance_eval(content)
+    def run(*args)
+      raise "Script content is empty" unless content.present?
+
+      script_path = Rails.root.join("script", "#{filename}.rb")
+      raise "Script file does not exist: #{script_path}" unless File.exist?(script_path)
+
+      # Rails 環境が正しくロードされるように Rails.root をカレントディレクトリに設定
+      Dir.chdir(Rails.root) do
+        system("ruby #{script_path} #{args}")
+      end
     rescue => e
       Rails.logger.error "Error running script #{filename}: #{e.message}"
       raise e
@@ -36,7 +44,7 @@ module Scriptor
 
     # ファイル内容をロード
     def load_content
-      script_path = Rails.root.join("script", "#{filename}")
+      script_path = Rails.root.join("script", "#{filename}.rb")
       File.exist?(script_path) ? File.read(script_path).strip : nil
     end
   end
