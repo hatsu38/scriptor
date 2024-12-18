@@ -1,8 +1,109 @@
-# Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+require:
+  - rubocop-rails
+  - rubocop-performance
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+AllCops:
+  Exclude:
+    - "db/schema.rb"
+    - "log/**/*"
+    - "bin/**/*"
+    - "public/**/*"
+    - "lib/templates/**/*"
+    - "vendor/**/*"
+    - "node_modules/**/*"
+    - 'tmp/**/*'
+    - 'storage/**/*'
+  DisplayCopNames: true
+  NewCops: enable
+  TargetRubyVersion: 3.3
+
+Rails:
+  Enabled: true
+
+##### Layout #####
+# 1行の長さ
+Layout/LineLength:
+  Max: 130
+  # #で始まる行, classで始まる行は長さのチェックをしない
+  AllowedPatterns: ['\A# .+', '\Aclass .+', '\ARSpec.describe .+']
+
+# 複数行のメソッドチェーンはインデントを1つ深くして書く
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+
+##### Lint #####
+
+##### Rails #####
+# InverseOfは書かなくてもいい
+Rails/InverseOf:
+  Enabled: false
+
+##### Bundler #####
+# Gemはアルファベット順に並べなくていい
+Bundler/OrderedGems:
+  Enabled: false
+
+##### Styles #####
+# frozen_string_literal：trueは書かない
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+# シンボルの配列の書き方の指定 :%iは使わない
+Style/SymbolArray:
+  Enabled: false
+
+# Module名::Class名の書き方の指定なし
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+# 英語以外の文字があることを許可
+Style/AsciiComments:
+  Enabled: false
+
+# ModuleやClassのドキュメントを書かなくてもいい
+Style/Documentation:
+  Enabled: false
+
+# シングルクオートではなく、ダブルクオートを使う
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+# if/unless分を1行で書かなくてもいい
+Style/IfUnlessModifier:
+  Enabled: false
+
+# %wや%iを使わなくてもいい
+Style/WordArray:
+  Enabled: false
+
+# &.でのチェーンは5つまで
+Style/SafeNavigationChainLength:
+  Max: 4
+
+##### Metrics #####
+# 引数の数は5以上で警告とする
+Metrics/ParameterLists:
+  Max: 5
+
+# Block内の行数指定
+Metrics/BlockLength:
+  Max: 20
+
+# メソッドの行数
+Metrics/MethodLength:
+  Max: 32
+
+# 循環複雑度
+Metrics/CyclomaticComplexity:
+  Max: 15
+
+# AbiSize
+Metrics/AbcSize:
+  Max: 38
+
+Metrics/PerceivedComplexity:
+  Max: 15
+
+# クラスの行数
+Metrics/ClassLength:
+  Max: 140

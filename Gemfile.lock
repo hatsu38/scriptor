@@ -195,9 +195,6 @@ GEM
       unicode-display_width (>= 2.4.0, < 4.0)
     rubocop-ast (1.36.2)
       parser (>= 3.3.1.0)
-    rubocop-minitest (0.36.0)
-      rubocop (>= 1.61, < 2.0)
-      rubocop-ast (>= 1.31.1, < 2.0)
     rubocop-performance (1.23.0)
       rubocop (>= 1.48.1, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
@@ -206,11 +203,6 @@ GEM
       rack (>= 1.1)
       rubocop (>= 1.52.0, < 2.0)
       rubocop-ast (>= 1.31.1, < 2.0)
-    rubocop-rails-omakase (1.0.0)
-      rubocop
-      rubocop-minitest
-      rubocop-performance
-      rubocop-rails
     ruby-progressbar (1.13.0)
     securerandom (0.3.2)
     sqlite3 (2.3.1-arm64-darwin)
@@ -236,7 +228,9 @@ DEPENDENCIES
   debug
   propshaft
   puma
-  rubocop-rails-omakase
+  rubocop
+  rubocop-performance
+  rubocop-rails
   scriptor!
   sqlite3
 
