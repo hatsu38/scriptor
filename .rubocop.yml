@@ -34,6 +34,11 @@ Layout/MultilineMethodCallIndentation:
 ##### Lint #####
 
 ##### Rails #####
+
+# i18nのテキストは書かなくてもよしとする
+Rails/I18nLocaleTexts:
+  Enabled: false
+
 # InverseOfは書かなくてもいい
 Rails/InverseOf:
   Enabled: false
@@ -88,6 +93,9 @@ Metrics/ParameterLists:
 # Block内の行数指定
 Metrics/BlockLength:
   Max: 20
+  Exclude:
+    - 'test/dummy/config/environments/*.rb'
+    - 'scriptor.gemspec'
 
 # メソッドの行数
 Metrics/MethodLength:

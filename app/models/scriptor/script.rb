@@ -26,7 +26,7 @@ module Scriptor
 
     # スクリプトの実行メソッド
     def run(*args)
-      raise "Script content is empty" unless content.present?
+      raise "Script content is empty" if content.blank?
 
       script_path = Rails.root.join("script", "#{filename}.rb")
       raise "Script file does not exist: #{script_path}" unless File.exist?(script_path)
@@ -36,7 +36,7 @@ module Scriptor
         escaped_args = args.map(&:shellescape).join(" ")
         system("ruby #{script_path} #{escaped_args}")
       end
-    rescue => e
+    rescue StandardError => e
       Rails.logger.error "Error running script #{filename}: #{e.message}"
       raise e
     end
