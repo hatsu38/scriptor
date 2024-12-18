@@ -9,10 +9,10 @@ Gem::Specification.new do |spec|
   spec.summary = "A Rails Engine to execute and manage scripts directly from your browser."
   spec.description = <<~DESC
     Scriptor is a Rails Engine that allows you to manage and execute Ruby scripts
-    located in the `script` folder directly from a web interface. This gem is 
-    designed for developers who want an intuitive way to trigger and monitor 
+    located in the `script` folder directly from a web interface. This gem is
+    designed for developers who want an intuitive way to trigger and monitor
     scripts without needing to access the command line.
-    
+
     Key Features:
     - Run Ruby scripts with dynamic arguments via a browser-based UI.
     - Preview script execution commands before running them.
@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   DESC
   spec.homepage = "https://github.com/hatsu38/scriptor"
   spec.license = "MIT"
-  spec.required_ruby_version = ">= 3.0.0"
+  spec.required_ruby_version = ">= 3.3.0"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the "allowed_push_host"
   # to allow pushing to a single host or delete this section to allow pushing to any host.
@@ -35,4 +35,5 @@ Gem::Specification.new do |spec|
   end
 
   spec.add_dependency "rails", ">= 8.0.0"
+  spec.metadata["rubygems_mfa_required"] = "true"
 end

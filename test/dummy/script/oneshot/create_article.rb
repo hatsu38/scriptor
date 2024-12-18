@@ -2,7 +2,7 @@ require_relative "../../config/environment"
 
 title, text = ARGV
 if title.nil? || text.nil?
-  puts "Usage: #{$0} TITLE TEXT"
+  puts "Usage: #{$PROGRAM_NAME} TITLE TEXT"
   exit 1
 end
 
