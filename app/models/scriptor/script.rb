@@ -21,7 +21,7 @@ module Scriptor
       scripts_path = Rails.root.join("script", "#{filename}.rb")
       return nil unless File.exist?(scripts_path)
 
-      new(filename) # インスタンス化
+      new(filename)
     end
 
     # スクリプトの実行メソッド
@@ -33,7 +33,8 @@ module Scriptor
 
       # Rails 環境が正しくロードされるように Rails.root をカレントディレクトリに設定
       Dir.chdir(Rails.root) do
-        system("ruby #{script_path} #{args}")
+        escaped_args = args.map(&:shellescape).join(" ")
+        system("ruby #{script_path} #{escaped_args}")
       end
     rescue => e
       Rails.logger.error "Error running script #{filename}: #{e.message}"
