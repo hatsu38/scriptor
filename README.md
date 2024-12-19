@@ -13,8 +13,10 @@ https://github.com/user-attachments/assets/057c75ce-7c8e-4c89-a238-13546b5797f1
 ## 使い方
 
 1. `bundle add scriptor`
-2. config/routes.rb に `mount Scriptor::Engine => "/scriptor"` を記載
-3. scriptフォルダにスクリプトを作る
+2. `bin/rails generate maintenance_tasks:install` を実行
+    - `config/routes.rb` に `mount Scriptor::Engine => "/scriptor"` が記載されます
+    - `db/migrations/****_create_scriptor_executions.scriptor.rb` ファイルが作成されます
+3. scriptフォルダにスクリプトを作ると、/scriptor ページにスクリプト一覧が並びます
 
 で完成です。
 
