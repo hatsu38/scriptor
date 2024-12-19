@@ -6,6 +6,7 @@ module Scriptor
 
     def show
       @script = Scriptor::Script.find(params[:filename])
+      @executions = Execution.where(script_filename: @script.filename).order(id: :desc)
     end
 
     def run
