@@ -10,9 +10,27 @@
   <%= stylesheet_link_tag    "scriptor/application", media: "all" %>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-
-<%= yield %>
-
+<body class="bg-gray-900 text-gray-200">
+  <section class="max-w-4xl mx-auto px-4 py-6">
+    <% if notice %>
+      <div class="mb-4 flex items-center space-x-3 bg-green-800 border border-green-500 rounded-md p-4 shadow-lg">
+        <svg class="h-5 w-5 text-green-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+             xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 11l3 3L22 4"></path>
+        </svg>
+        <span class="font-semibold"><%= notice %></span>
+      </div>
+    <% elsif alert %>
+      <div class="mb-4 flex items-center space-x-3 bg-red-800 border border-red-500 rounded-md p-4 shadow-lg">
+        <svg class="h-5 w-5 text-red-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M18.364 5.636L12 12m0 0L5.636 5.636M12 12l0 8"></path>
+        </svg>
+        <span class="font-semibold"><%= alert %></span>
+      </div>
+    <% end %>
+    <%= yield %>
+  </section>
 </body>
 </html>

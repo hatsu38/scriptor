@@ -34,7 +34,12 @@ module Scriptor
       escaped_args = args.map(&:shellescape).join(" ")
       command = "ruby #{script_path} #{escaped_args}"
       # Rails 環境が正しくロードされるように Rails.root をカレントディレクトリに設定
-      execution = Execution.create!(script_filename: filename, status: :running, executed_command: command, started_at: Time.current)
+      execution = Execution.create!(
+        script_filename: filename,
+        status: :running,
+        executed_command: command,
+        started_at: Time.current
+      )
       Dir.chdir(Rails.root) do
         result = system(command)
         execution.update!(status: result ? :success : :error, finished_at: Time.current)

@@ -87,7 +87,7 @@ Style/SafeNavigationChainLength:
 
 Style/NumericLiterals:
   Exclude:
-    - 'test/dummy/config/environments/*.rb'
+    - 'test/dummy/db/schema.rb'
     - 'scriptor.gemspec'
 
 ##### Metrics #####
