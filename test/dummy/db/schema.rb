@@ -10,11 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 20_241_218_144_723) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_19_110922) do
   create_table "articles", force: :cascade do |t|
     t.string "title", null: false
     t.text "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "scriptor_executions", force: :cascade do |t|
+    t.string "script_filename", null: false
+    t.string "status", null: false
+    t.text "executed_command", null: false
+    t.text "error_message"
+    t.datetime "started_at", null: false
+    t.datetime "finished_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["script_filename"], name: "index_scriptor_executions_on_script_filename"
   end
 end

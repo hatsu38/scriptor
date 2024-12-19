@@ -85,6 +85,11 @@ Style/WordArray:
 Style/SafeNavigationChainLength:
   Max: 4
 
+Style/NumericLiterals:
+  Exclude:
+    - 'test/dummy/db/schema.rb'
+    - 'scriptor.gemspec'
+
 ##### Metrics #####
 # 引数の数は5以上で警告とする
 Metrics/ParameterLists:

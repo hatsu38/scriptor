@@ -1,3 +1,5 @@
+require "open3"
+
 module Scriptor
   class Script
     attr_reader :filename, :content
@@ -31,14 +33,26 @@ module Scriptor
       script_path = Rails.root.join("script", "#{filename}.rb")
       raise "Script file does not exist: #{script_path}" unless File.exist?(script_path)
 
+      escaped_args = args.map(&:shellescape).join(" ")
+      command = "ruby #{script_path} #{escaped_args}"
       # Rails 環境が正しくロードされるように Rails.root をカレントディレクトリに設定
+      execution = Execution.create!(
+        script_filename: filename,
+        status: :running,
+        executed_command: command,
+        started_at: Time.current
+      )
       Dir.chdir(Rails.root) do
-        escaped_args = args.map(&:shellescape).join(" ")
-        system("ruby #{script_path} #{escaped_args}")
+        _, err, status = Open3.capture3(command)
+        if status.success?
+          # コマンド成功時の処理
+          execution.update!(status: :success, finished_at: Time.current)
+        else
+          error_message = err.presence || "Command failed with exit status #{status.exitstatus}"
+          execution.update!(status: :error, error_message: error_message.strip, finished_at: Time.current)
+          raise error_message
+        end
       end
-    rescue StandardError => e
-      Rails.logger.error "Error running script #{filename}: #{e.message}"
-      raise e
     end
 
     private
