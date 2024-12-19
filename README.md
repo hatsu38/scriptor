@@ -18,6 +18,20 @@ https://github.com/user-attachments/assets/057c75ce-7c8e-4c89-a238-13546b5797f1
 
 で完成です。
 
+## リリース手順
+
+0. version.rb と Gemfile.lockのscriptorのバージョンが適切か確認しましょう
+
+
+1. gemのbuild
+    ```shell
+    gem build scriptor.gemspec
+    ```
+
+2. gemのpush
+    ```shll
+    gem push scriptor-*.*.*.gem
+    ```
 
 ## Contributing
 - 色々足りていません。大歓迎です。
