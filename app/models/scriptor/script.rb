@@ -1,3 +1,5 @@
+require "open3"
+
 module Scriptor
   class Script
     attr_reader :filename, :content
@@ -41,13 +43,16 @@ module Scriptor
         started_at: Time.current
       )
       Dir.chdir(Rails.root) do
-        result = system(command)
-        execution.update!(status: result ? :success : :error, finished_at: Time.current)
+        _, err, status = Open3.capture3(command)
+        if status.success?
+          # コマンド成功時の処理
+          execution.update!(status: :success, finished_at: Time.current)
+        else
+          error_message = err.presence || "Command failed with exit status #{status.exitstatus}"
+          execution.update!(status: :error, error_message: error_message.strip, finished_at: Time.current)
+          raise error_message
+        end
       end
-    rescue StandardError => e
-      Rails.logger.error "Error running script #{filename}: #{e.message}"
-      execution&.update!(status: :error, error_message: e.message, finished_at: Time.current)
-      raise e
     end
 
     private
