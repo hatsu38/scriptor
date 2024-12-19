@@ -31,13 +31,17 @@ module Scriptor
       script_path = Rails.root.join("script", "#{filename}.rb")
       raise "Script file does not exist: #{script_path}" unless File.exist?(script_path)
 
+      escaped_args = args.map(&:shellescape).join(" ")
+      command = "ruby #{script_path} #{escaped_args}"
       # Rails 環境が正しくロードされるように Rails.root をカレントディレクトリに設定
+      execution = Execution.create!(script_filename: filename, status: :running, executed_command: command, started_at: Time.current)
       Dir.chdir(Rails.root) do
-        escaped_args = args.map(&:shellescape).join(" ")
-        system("ruby #{script_path} #{escaped_args}")
+        result = system(command)
+        execution.update!(status: result ? :success : :error, finished_at: Time.current)
       end
     rescue StandardError => e
       Rails.logger.error "Error running script #{filename}: #{e.message}"
+      execution&.update!(status: :error, error_message: e.message, finished_at: Time.current)
       raise e
     end
 
