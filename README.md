@@ -6,8 +6,8 @@ Scriptorはscriptフォルダにあるrubyファイルを、ブラウザから�
 
 このscriptをブラウザから一覧で見たり、詳細ページではコードを閲覧したり、実行できます。
 
-<image src="https://github.com/user-attachments/assets/b63b75b1-517e-464f-a437-68067fcd4179" width="500" />
-<image src="https://github.com/user-attachments/assets/ec2ed5e1-4171-4bec-a800-aa52a7eefb0d" width="500" />
+https://github.com/user-attachments/assets/057c75ce-7c8e-4c89-a238-13546b5797f1
+
 
 
 ## 使い方
